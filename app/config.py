@@ -7,6 +7,6 @@ SQLALCHEMY_DATABASE_URI = "sqlite:///" + path.join(basedir, dbname)
 SQLALCHEMY_ECHO = False
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-DEBUG = False
-TESTING = False
+#DEBUG = True
+TESTING = True
 SECRET_KEY = urandom(30)

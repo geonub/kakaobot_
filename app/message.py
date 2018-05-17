@@ -1,5 +1,7 @@
 from .keyboard import Keyboard
 from ujson import dumps, loads
+from bs4 import BeautifulSoup
+import requests
 
 
 class classproperty(object):
@@ -26,7 +28,7 @@ class Message:
     }
     _base_message = {
         "message": {
-            "text": "기본 메시지",
+            "text": "구현 중이에요 ㅠ^ㅠ",
         },
         "keyboard": _base_keyboard,
     }
@@ -227,7 +229,6 @@ class BaseMessage(Message):
         _keyboard["buttons"] = keyboard
         self.returned_message["keyboard"] = _keyboard
 
-
 class FailMessage(BaseMessage):
     """
     처리 중 예외가 발생했을 때 반환되는 메시지입니다.
@@ -248,7 +249,6 @@ class HomeMessage(Message):
         self.returned_message = Message.base_keyboard
         home_keyboard = Keyboard.home_buttons
         self.returned_message["buttons"] = home_keyboard
-
 
 class SuccessMessage(Message):
     """

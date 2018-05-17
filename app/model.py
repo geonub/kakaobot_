@@ -17,3 +17,15 @@ class User(db.Model):
 
     def __repr__(self):
         return "<User %r>" % (self.user_key)
+
+class Session(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_key = db.Column(db.String(32), index=True, unique=True)
+    stock = db.Column(db.String())
+
+    def __init__(self, user_key, stock='N'):
+        self.user_key = user_key
+        self.stock = stock
+
+    def __repr__(self):
+        return "<Session %r>" % (self.user_key)

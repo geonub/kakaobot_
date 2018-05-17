@@ -1,7 +1,12 @@
 from app import app
 from flask import request, jsonify
+import traceback
 from .manager import APIHandler
 
+def processFail():
+    message = APIAdmin.process("fail").getMessage()
+    viewLog("fail")
+    return jsonify(message)
 
 @app.route("/keyboard", methods=["GET"])
 def yellow_keyboard():
@@ -11,9 +16,12 @@ def yellow_keyboard():
 
 @app.route("/message", methods=["POST"])
 def yellow_message():
-    message, code = APIHandler.process("message", request.json)
-    return jsonify(message), code
-
+    try:
+        message, code = APIHandler.process("message", request.json)
+        return jsonify(message), code
+    except:
+        traceback.print_exc()
+        return processFail(), 400
 
 @app.route("/friend", methods=["POST"])
 def yellow_friend_add():
